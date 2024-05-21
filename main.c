@@ -160,13 +160,17 @@ int main()
                     {
                         if(promptFlag != 1) // do not need to press 'a' after select option
                         {
-                            userOptions = get_option();
+                            while(userOptions != 3)
+                            {
+                                userOptions = get_option();
+                            }
                         }
                         
                         if(userOptions == 3 || promptFlag == 1)
                         {
                             const toml_table_t* subtable = toml_table_at(array, k);
                             promptFlag = 0;
+                            userOptions = 0;
 
                             if(subtable) 
                             {
@@ -201,7 +205,10 @@ int main()
                                             printf("Prompt Text: %s\n", promptQ);
                                         #endif 
 
-                                        int32_t userOptions = get_option();
+                                        while(userOptions != 3)
+                                        {
+                                            userOptions = get_option();
+                                        }
                         
                                         // display prompt text
                                         if(userOptions == 3)
@@ -211,7 +218,11 @@ int main()
                                     }
 
                                     // get prompt choice
-                                    userOptions = get_option();
+                                    // while(userOptions != 1 || userOptions != 2)
+                                    // {
+                                        userOptions = get_option();
+                                    // }
+
                                     promptFlag = 1;
 
                                     const toml_table_t* promptTable = toml_table_at(prompt, userOptions);
@@ -253,6 +264,7 @@ int main()
 
                     if(jumpFlag == 1)
                     {
+                        // store the destination
                         dialogueKey = desString;
                         key = desString2;
                         break;
