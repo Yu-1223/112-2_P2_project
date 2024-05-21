@@ -1,0 +1,118 @@
+# TOML -> JSON : https://www.convertsimple.com/convert-toml-to-json/
+# JSON -> TOML : https://www.convertsimple.com/convert-json-to-toml/
+
+[information.charactor]
+    [information.charactor.Crying_Cat]
+        name = "Crying_Cat"
+        avatar = "Crying_Cat.bmp"
+    [information.charactor.Polite_Cat]
+        name = "Polite_Cat"
+        avatar = "Polite_Cat.bmp"
+
+
+# [dialogue.home.background]
+#     background = "home.bmp"
+
+
+[[dialogue.home.start]]
+        charactor = "Crying_Cat"
+        text = "Meow... (quiet meow)"
+        [[dialogue.home.start.prompt]]
+            text = "Do you want to meet the cat?"
+            [[dialogue.home.start.prompt]]
+                text = "Yes"
+                next = "home.found_crying_cat"
+            [[dialogue.home.start.prompt]]
+                text = "No"
+                next = "ending.1"  # ending1 - 未完成任務結局
+
+[[dialogue.home.found_crying_cat]]
+        charactor = "Crying_Cat"
+        text = "Meow... (sad meow)"
+        [[dialogue.home.found_crying_cat.prompt]]
+        text = "You've found the Crying Cat. Do you want to use the Soothing Ball to comfort it?"
+        [[dialogue.home.found_crying_cat.prompt]]
+            text = "Yes"
+            next = "home.used_soothing_ball"
+        [[dialogue.home.found_crying_cat.prompt]]
+            text = "No"
+            next = "ending.2"  # ending2 - 無效治療
+
+
+
+[[dialogue.home.used_soothing_ball]]
+    charactor = "system"
+    text = "You used the Soothing Ball, and the Crying Cat seems much happier."
+[[dialogue.home.used_soothing_ball]]
+    charactor = "Crying_Cat"
+    text = "Meow meow! (happy meow)"
+    [[dialogue.home.used_soothing_ball.prompt]]
+    text = "The Crying Cat seems to be feeling better. Perhaps taking it to the Veterinary Clinic would be a good idea."
+    [[dialogue.home.used_soothing_ball.prompt]]
+        text = "Yes"
+        next = "clinic.arrived_clinic"
+    [[dialogue.home.used_soothing_ball.prompt]]
+        text = "Why Not?"
+        next = "clinic.arrived_clinic"
+
+
+# [dialogue.clinic.background]
+#     background = "clinic.bmp"
+
+[[dialogue.clinic.arrived_clinic]]
+    charactor = "system"
+    text = "At the Veterinary Clinic, the Polite Cat examines the Crying Cat carefully."
+[[dialogue.clinic.arrived_clinic]]
+    charactor = "Polite_Cat"
+    text = "Based on my examination, I recommend some simple treatments. Would you accept my advice?"
+    [[dialogue.clinic.arrived_clinic.prompt]]
+    text = "Do you accept Polite Cat's advice for treatment, or do you reject it?"
+    [[dialogue.clinic.arrived_clinic.prompt]]
+        text = "Yes"
+        next = "clinic.received_treatment"
+    [[dialogue.clinic.arrived_clinic.prompt]]
+        text = "No"
+        next = "ending.2"  # ending2 - 無效治療
+
+
+
+[[dialogue.clinic.received_treatment]]
+    charactor = "system"
+    text = "After receiving treatment, the Crying Cat looks much more spirited."
+[[dialogue.clinic.received_treatment]]  
+    charactor = "Crying_Cat"
+    text = "Meow wow! (thankful meow)"
+[[dialogue.clinic.received_treatment]]
+    charactor = "system"
+    text = "The Crying Cat now seems very healthy. This is a great time to celebrate in the park!"
+    next = "park.arrived_park"
+
+
+# [dialogue.park.background]
+#     background = "park"
+    
+
+[[dialogue.park.arrived_park]]
+    charactor = "system"
+    text = "In the park, you meet the playful Banana Cat."
+[[dialogue.park.arrived_park]]
+    charactor = "Banana_Cat"
+    text = "Meow meow, let's play hide and seek!"
+    [[dialogue.park.arrived_park.prompt]]
+        text = "Do you join Banana Cat in the game, or choose not to participate?"
+    [[dialogue.park.arrived_park.prompt]]
+        text = "Yes"
+        next = "ending.3"  # ending3 - Happy Ending
+    [[dialogue.park.arrived_park.prompt]]
+        text = "No"
+        next = "ending.1"  # ending1 - 未完成任務結局
+
+[dialogue.ending]
+    [dialogue.ending.1]
+        # tbd...
+    [dialogue.ending.2]
+        # tbd...
+    [dialogue.ending.3]
+        # tbd...
+    
+
