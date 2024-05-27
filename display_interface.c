@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int get_option(){
+int get_option(char *button1, char *button2){
     // Initialize ncurses
     initscr();
     start_color(); // Start color functionality
@@ -25,19 +25,20 @@ int get_option(){
     // Calculate the width of each button
     int button_width = max_x / 2;
     // Calculate the start position for the option strings
-    int option1_start = (button_width - strlen("[Option 1]")) / 2;
-    int option2_start = (button_width - strlen("[Option 2]")) / 2;
+    int option1_start = (button_width - strlen(button1)) / 2;
+    int option2_start = (button_width - strlen(button2)) / 2;
+
     // Create the dialogue text buttons
     WINDOW* buttonwin1 = newwin(max_y / 8, button_width, 2 * max_y / 9 + 4 * max_y / 6, 0);
     wbkgd(buttonwin1, COLOR_PAIR(1)); // Set the background color of the window
     box(buttonwin1, 0, 0);
-    mvwprintw(buttonwin1, 1, option1_start, "[Option 1]");
+    mvwprintw(buttonwin1, 1, option1_start, "%s", button1);
     wrefresh(buttonwin1);
 
     WINDOW* buttonwin2 = newwin(max_y / 8, button_width, 2 * max_y / 9 + 4 * max_y / 6, button_width);
     wbkgd(buttonwin2, COLOR_PAIR(1)); // Set the background color of the window
     box(buttonwin2, 0, 0);
-    mvwprintw(buttonwin2, 1, option2_start, "[Option 2]");
+    mvwprintw(buttonwin2, 1, option2_start, "%s", button2);
     wrefresh(buttonwin2);
     // Wait for user input
     int ch;
@@ -45,6 +46,10 @@ int get_option(){
     while ((ch = getch()) != KEY_ENTER && ch != '\n' && ch != '\r') {
         if(ch == 'a'){
             option = 3;
+            break;
+        }
+        else if(ch == 'b'){
+            option = 4;
             break;
         }
         switch (ch) {
@@ -61,19 +66,19 @@ int get_option(){
         // Highlight the selected button
         if (option == 1) {
             wattron(buttonwin1, A_REVERSE);
-            mvwprintw(buttonwin1, 1, option1_start, "[Option 1]");
+            mvwprintw(buttonwin1, 1, option1_start, "%s", button1);
             wattroff(buttonwin1, A_REVERSE);
             wrefresh(buttonwin1);
 
-            mvwprintw(buttonwin2, 1, option2_start, "[Option 2]");
+            mvwprintw(buttonwin2, 1, option2_start, "%s", button2);
             wrefresh(buttonwin2);
         } else if (option == 2) {
             wattron(buttonwin2, A_REVERSE);
-            mvwprintw(buttonwin2, 1, option2_start, "[Option 2]");
+            mvwprintw(buttonwin2, 1, option2_start, "%s", button2);
             wattroff(buttonwin2, A_REVERSE);
             wrefresh(buttonwin2);
 
-            mvwprintw(buttonwin1, 1, option1_start, "[Option 1]");
+            mvwprintw(buttonwin1, 1, option1_start, "%s", button1);
             wrefresh(buttonwin1);
         }
     }
@@ -146,27 +151,9 @@ void display_interface(char *image, char *dialogue, int options, char *bag_item,
     // Create the dialogue line window
     WINDOW* dialogwin = newwin(2 * max_y / 9, max_x, 4 * max_y / 6, 0);
     box(dialogwin, 0, 0);
-    mvwprintw(dialogwin, max_y / 6 - 1, max_x - 24, "[press 'a' to continue]");
+    mvwprintw(dialogwin, 2 * max_y / 9 - 3, max_x - 24, "[press 'a' to continue]");
+    mvwprintw(dialogwin, 2 * max_y / 9 - 2, max_x - 24, "[press 'b' to open bag]");
     mvwprintw(dialogwin, 1, 1, "%s", dialogue);
     wbkgd(dialogwin, COLOR_PAIR(3));
     wrefresh(dialogwin);
-
-    // Calculate the width of each button
-    int button_width = max_x / 2;
-    // Calculate the start position for the option strings
-    int option1_start = (button_width - strlen("[Option 1]")) / 2;
-    int option2_start = (button_width - strlen("[Option 2]")) / 2;
-
-    // Create the dialogue text buttons
-    WINDOW* buttonwin1 = newwin(max_y / 8, button_width, 2 * max_y / 9 + 4 * max_y / 6, 0);
-    wbkgd(buttonwin1, COLOR_PAIR(1)); // Set the background color of the window
-    box(buttonwin1, 0, 0);
-    mvwprintw(buttonwin1, 1, option1_start, "[Option 1]");
-    wrefresh(buttonwin1);
-
-    WINDOW* buttonwin2 = newwin(max_y / 8, button_width, 2 * max_y / 9 + 4 * max_y / 6, button_width);
-    wbkgd(buttonwin2, COLOR_PAIR(1)); // Set the background color of the window
-    box(buttonwin2, 0, 0);
-    mvwprintw(buttonwin2, 1, option2_start, "[Option 2]");
-    wrefresh(buttonwin2);
 }

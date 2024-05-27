@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "toml.h"
 #include "display_interface.h"
 
@@ -46,34 +47,6 @@ int32_t getSectionIndex(int32_t dialogueIndex, const char *sectionKey)
     }
 }
 
-char *parse_prompt(const toml_array_t* prompts, int32_t userOptions) 
-{
-    const toml_table_t* prompt = toml_table_at(prompts, userOptions);
-
-    const char* prompt_text = toml_raw_in(prompt, "text");
-    const char* next = toml_raw_in(prompt, "next");
-    
-    if(prompt_text) 
-    {
-        #ifdef DEBUG
-            printf("Prompt Text: %s\n", prompt_text);
-        #endif 
-    }
-    
-    if(next) 
-    {
-        #ifdef DEBUG
-            printf("Next: %s\n", next);
-       #endif 
-        
-        return strdup(next); 
-    }
-    else
-    {
-        return NULL;
-    }   
-}
-
 
 int main() 
 {
@@ -106,6 +79,8 @@ int main()
     char *desString = (char *)malloc(50 * sizeof(char));  
     char *desString2 = (char *)malloc(50 * sizeof(char));
     char *optionNext = (char *)malloc(50 * sizeof(char));
+    char *option1Text = (char *)malloc(10 * sizeof(char));
+    char *option2Text = (char *)malloc(10 * sizeof(char));
     int32_t jumpFlag = 0; // the flag for jumping after choosing the option 
     int32_t promptFlag = 0;
     int32_t userOptions = 0;
@@ -160,17 +135,41 @@ int main()
                     {
                         if(promptFlag != 1) // do not need to press 'a' after select option
                         {
-                            while(userOptions != 3)
+                            do
                             {
-                                userOptions = get_option();
+                                userOptions = get_option(" ", " ");
+
+                            }while(userOptions != 3 && userOptions != 4);
+                        }
+
+                        if(userOptions == 4) // open backpack
+                        {
+                            display_interface("cat.jpg", "backpack Opened!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+
+                            do
+                            {
+                                userOptions = get_option("item1", "item2");
+
+                            }while(userOptions != 1 && userOptions != 2);
+
+                            if(userOptions == 1)
+                            {
+                                display_interface("cat.jpg", "item 1 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                sleep(1);
                             }
+                            else if(userOptions == 2)
+                            {
+                                display_interface("cat.jpg", "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                sleep(1);
+                            }
+
+                            userOptions = 3; // restore user option to 3 to disply dialogue
                         }
                         
                         if(userOptions == 3 || promptFlag == 1)
                         {
                             const toml_table_t* subtable = toml_table_at(array, k);
                             promptFlag = 0;
-                            userOptions = 0;
 
                             if(subtable) 
                             {
@@ -205,9 +204,34 @@ int main()
                                             printf("Prompt Text: %s\n", promptQ);
                                         #endif 
 
-                                        while(userOptions != 3)
+                                        do
                                         {
-                                            userOptions = get_option();
+                                            userOptions = get_option(" ", " ");
+
+                                        }while(userOptions != 3 && userOptions != 4);
+
+                                        if(userOptions == 4) // open backpack
+                                        {
+                                            display_interface("cat.jpg", "backpack Opened!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+
+                                            do
+                                            {
+                                                userOptions = get_option("item1", "item2");
+
+                                            }while(userOptions != 1 && userOptions != 2);
+
+                                            if(userOptions == 1)
+                                            {
+                                                display_interface("cat.jpg", "item 1 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                sleep(1);
+                                            }
+                                            else if(userOptions == 2)
+                                            {
+                                                display_interface("cat.jpg", "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                sleep(1);
+                                            }
+
+                                            userOptions = 3; // restore user option to 3 to disply dialogue
                                         }
                         
                                         // display prompt text
@@ -217,26 +241,33 @@ int main()
                                         }
                                     }
 
-                                    // get prompt choice
-                                    // while(userOptions != 1 || userOptions != 2)
-                                    // {
-                                        userOptions = get_option();
-                                    // }
+                                    const toml_table_t* promptTable1 = toml_table_at(prompt, 1);
+                                    const toml_table_t* promptTable2 = toml_table_at(prompt, 2);
+                                    memset(option1Text, '\0', 10);
+                                    memset(option2Text, '\0', 10);
+
+                                    option1Text = toml_raw_in(promptTable1, "text");
+                                    option2Text = toml_raw_in(promptTable2, "text");
+
+                                    option1Text[strlen(option1Text) - 1] = '\0'; // get rid of ""
+                                    option2Text[strlen(option2Text) - 1] = '\0'; // get rid of ""
+
+                                    do
+                                    {
+                                        userOptions = get_option(option1Text + 1, option2Text + 1);
+
+                                    }while(userOptions != 1 && userOptions != 2);
 
                                     promptFlag = 1;
+                                    const char* next;
 
-                                    const toml_table_t* promptTable = toml_table_at(prompt, userOptions);
-
-                                    const char* promptOptionText = toml_raw_in(promptTable, "text");
-                                    const char* next = toml_raw_in(promptTable, "next");
-                                    
-                                    // get the option text, but it is not used for now
-                                    if(promptOptionText) 
+                                    if(userOptions == 1)
                                     {
-                                        memset(optionNext, '\0', 50);
-                                        #ifdef DEBUG
-                                            printf("Prompt Text: %s\n", promptOptionText);
-                                        #endif 
+                                        next = toml_raw_in(promptTable1, "next");
+                                    }
+                                    else if(userOptions == 2)
+                                    {
+                                        next = toml_raw_in(promptTable2, "next");
                                     }
                                     
                                     if(next) 
@@ -244,6 +275,7 @@ int main()
                                         // get the jump destination
                                         memset(desString, '\0', 50);
                                         memset(desString2, '\0', 50);
+                                        memset(optionNext, '\0', 50);
                                         #ifdef DEBUG
                                             printf("Next: %s\n", next);
                                         #endif 
