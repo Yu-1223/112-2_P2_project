@@ -245,7 +245,7 @@ int main()
                                                 sleep(1);
                                             }
 
-                                            goto beforeBackpack; // jump to label (code before open backpack;)
+                                            goto beforeBackpack; // jump to label (code before open backpack)
                                         }
                         
                                         // display prompt text
