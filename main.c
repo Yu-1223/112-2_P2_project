@@ -84,6 +84,7 @@ int main()
     int32_t jumpFlag = 0; // the flag for jumping after choosing the option 
     int32_t promptFlag = 0;
     int32_t userOptions = 0;
+    int32_t prevK = 0;
 
     display_interface("", "", 0, "", "", "", "");
 
@@ -144,13 +145,13 @@ int main()
 
                         if(userOptions == 4) // open backpack
                         {
-                            display_interface("cat.jpg", "backpack Opened!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                            display_interface("cat.jpg", "backpack Opened! Press \"b\" again to close or chooes to apply item!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
 
                             do
                             {
                                 userOptions = get_option("item1", "item2");
 
-                            }while(userOptions != 1 && userOptions != 2);
+                            }while(userOptions != 1 && userOptions != 2 && userOptions != 4);
 
                             if(userOptions == 1)
                             {
@@ -162,14 +163,22 @@ int main()
                                 display_interface("cat.jpg", "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                 sleep(1);
                             }
+                            else if(userOptions == 4)
+                            {
+                                display_interface("cat.jpg", "backpack Closed1!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                sleep(1);
+                            }
 
-                            userOptions = 3; // restore user option to 3 to disply dialogue
+                            userOptions = 3;
+                            k = prevK;
                         }
                         
                         if(userOptions == 3 || promptFlag == 1)
                         {
                             const toml_table_t* subtable = toml_table_at(array, k);
                             promptFlag = 0;
+
+                            beforeBackpack: // create label
 
                             if(subtable) 
                             {
@@ -212,13 +221,13 @@ int main()
 
                                         if(userOptions == 4) // open backpack
                                         {
-                                            display_interface("cat.jpg", "backpack Opened!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                            display_interface("cat.jpg", "backpack Opened! Press \"b\" again to close or chooes to apply item!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
 
                                             do
                                             {
                                                 userOptions = get_option("item1", "item2");
 
-                                            }while(userOptions != 1 && userOptions != 2);
+                                            }while(userOptions != 1 && userOptions != 2  && userOptions != 4);
 
                                             if(userOptions == 1)
                                             {
@@ -230,8 +239,13 @@ int main()
                                                 display_interface("cat.jpg", "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                                 sleep(1);
                                             }
+                                            else if(userOptions == 4)
+                                            {
+                                                display_interface("cat.jpg", "backpack Closed!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                sleep(1);
+                                            }
 
-                                            userOptions = 3; // restore user option to 3 to disply dialogue
+                                            goto beforeBackpack; // jump to label (code before open backpack;)
                                         }
                         
                                         // display prompt text
@@ -276,15 +290,19 @@ int main()
                                         memset(desString, '\0', 50);
                                         memset(desString2, '\0', 50);
                                         memset(optionNext, '\0', 50);
+
                                         #ifdef DEBUG
                                             printf("Next: %s\n", next);
                                         #endif 
+
                                         strncpy(optionNext, next, strlen(next));
                                         optionNext[strlen(optionNext) - 1] = '\0';
                                         sscanf(optionNext + 1, "%49[^.].%49s", desString, desString2);
+
                                         #ifdef DEBUG
                                             printf("des: %s, %s\n", desString, desString2);
                                         #endif 
+
                                         jumpFlag = 1;
                                         break;
                                     }
@@ -292,6 +310,8 @@ int main()
                                 }
                             }
                         }
+
+                        prevK = k;
                     }
 
                     if(jumpFlag == 1)
@@ -309,6 +329,8 @@ int main()
     free(desString);
     free(desString2);
     free(optionNext);
+    free(option1Text);
+    free(option2Text);
     toml_free(conf);
 
     return 0;
