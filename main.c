@@ -170,7 +170,7 @@ int main()
                             }
 
                             userOptions = 3;
-                            k = prevK;
+                            k = prevK; // go back to the previous dialogue
                         }
                         
                         if(userOptions == 3 || promptFlag == 1)
@@ -245,7 +245,7 @@ int main()
                                                 sleep(1);
                                             }
 
-                                            goto beforeBackpack; // jump to label (code before open backpack)
+                                            goto beforeBackpack; // jump to label (code before open backpack) -> use to go back to the previous dailogue
                                         }
                         
                                         // display prompt text
