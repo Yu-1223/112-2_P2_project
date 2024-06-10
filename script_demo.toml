@@ -14,58 +14,8 @@
     text = "You look around and find the house peaceful, but it seems there's something you need to explore."  
 [[dialogue.home.start]]
     character = "system"
-    text = "You find an adorable Banana Cat behind the sofa."     
-
-[[dialogue.home.before_finding_banana_cat]]
-    character = "system"
-    text = "You prepare breakfast for yourself and a special treat for Banana Cat."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "You"
-    text = "You: Here's the treat for you, Banana Cat!"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow! (happily eats the treat)"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "system"
-    text = "After breakfast, you decide to play with Banana Cat in the living room."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "You"
-    text = "You: Let's play with your favorite toy, Banana Cat!"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow! (pounces playfully at the toy)"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "system"
-    text = "You and Banana Cat enjoy a fun play session, with Banana Cat chasing after the toy energetically."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "You"
-    text = "You: You're so full of energy today, Banana Cat! This is great."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow! (purrs happily)"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "system"
-    text = "As the afternoon rolls around, you decide to relax with a book while Banana Cat naps beside you."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "You"
-    text = "You: It's nice to have a calm afternoon like this."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (curls up and falls asleep)"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "system"
-    text = "You notice Banana Cat starting to look a bit less energetic but assume it's just tired from playing."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "You"
-    text = "You: You seem a bit sleepy. Maybe you need a longer nap."
-[[dialogue.home.before_finding_banana_cat]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (nods off again)"
-[[dialogue.home.before_finding_banana_cat]]
-    character = "system"
-    text = "In the evening, you prepare dinner and notice that Banana Cat isn't as eager to eat as usual."
-
-
+    text = "You find an adorable Banana Cat behind the sofa. It looks a bit uneasy and needs your help."     
+    
 [[dialogue.home.found_banana_cat]]
     character = "You"
     text = "You: Banana Cat, what's wrong? Do you need my help?"
@@ -109,12 +59,11 @@
     text = "You: This soothing ball looks very soft; it should help you relax."
 [[dialogue.home.pick_up_smoothing_ball]]
     character = "Banana_Cat"
-    text = "Banana_Cat: Okay I'll keep it."
+    text = "Banana Cat: Okay I'll keep it."
 [[dialogue.home.pick_up_smoothing_ball]]
     character = "You"
     text = "You: You're welcome, the important thing is that you feel better."
     next = "clinic.arrived_clinic"
-
 
 [[dialogue.home.ignore_smoothing_ball]]
     character = "You"
@@ -127,157 +76,33 @@
     text = "You: Let's keep looking; maybe we'll discover something else."
 [[dialogue.home.ignore_smoothing_ball]]
     character = "Banana_Cat"
-    text = "Banana_Cat: Meow... I trust you."
-    next = "clinic.arrived_clinic"
+    text = "Banana Cat: Meow... I trust you."
 
 
 [[dialogue.clinic.arrived_clinic]]
     character = "system"
     text = "To ensure Banana Cat's health, you decide to take it to the veterinary clinic."
-    background = "clinic_nurse.jpg"
+    background = "clinic.jpg"
 [[dialogue.clinic.arrived_clinic]]
     character = "system"
-    text = "The waiting area is quiet, with a few other pets waiting with their owners."
+    text = "At the clinic, you meet a polite cat. It kindly gives you some advice on treatment."
 [[dialogue.clinic.arrived_clinic]]
-    character = "You"
-    text = "You: Banana Cat, let's sit here while we wait for our turn."
-[[dialogue.clinic.arrived_clinic]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (snuggles into your lap)"
-[[dialogue.clinic.arrived_clinic]]
-    character = "system"
-    text = "A friendly nurse approaches you with a clipboard."
-[[dialogue.clinic.arrived_clinic]]
-    character = "Nurse"
-    text = "Nurse: Hi there, I'm Nurse Whiskers. Can I get some information about Banana Cat's symptoms?"
-[[dialogue.clinic.arrived_clinic]]
-    character = "You"
-    text = "You: Sure, Banana Cat has been feeling a bit sluggish and has a reduced appetite."
-[[dialogue.clinic.arrived_clinic]]
-    character = "Nurse"
-    text = "Nurse: Thank you. The vet will see you shortly."
-
-
-[[dialogue.clinic.meet_new_friend]]
-    character = "system"
-    text = "At the clinic, while waiting for the vet, Banana Cat notices another cat sitting nearby."
-    background = "clinic_new_friend.jpg"
-[[dialogue.clinic.meet_new_friend]]
-    character = "You"
-    text = "You: Look, Banana Cat, there's another cat here. Maybe you can make a new friend."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (looks curiously at the other cat)"
-[[dialogue.clinic.meet_new_friend]]
-    character = "system"
-    text = "The other cat notices Banana Cat and walks over, purring softly."
-[[dialogue.clinic.meet_new_friend]]
-    character = "New_Cat"
-    text = "New Cat: Hi there! I'm Whiskers. Are you here for a check-up too?"
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... Yes, I haven't been feeling well."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Whiskers"
-    text = "Whiskers: Oh no, I'm sorry to hear that. I hope you feel better soon! I'm just here for my annual check-up."
-[[dialogue.clinic.meet_new_friend]]
-    character = "You"
-    text = "You: It's nice to meet you, Whiskers. I'm sure Banana Cat feels better already, having a friend like you."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Whiskers_Owner"
-    text = "Whiskers' Owner: Hi there! It's always nice to meet other pet owners. How long have you had Banana Cat?"
-[[dialogue.clinic.meet_new_friend]]
-    character = "You"
-    text = "You: We've been together for a few years now. Banana Cat is very special to me."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Whiskers_Owner"
-    text = "Whiskers' Owner: That's wonderful. Whiskers and I have been inseparable since I adopted him as a kitten."
-[[dialogue.clinic.meet_new_friend]]
-    character = "system"
-    text = "As you chat with Whiskers' owner, Banana Cat and Whiskers sit together, seemingly enjoying each other's company."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (purrs softly, feeling a bit more at ease)"
-[[dialogue.clinic.meet_new_friend]]
-    character = "Whiskers"
-    text = "Whiskers: If you need any tips on feeling better, just let me know. I've been to the clinic plenty of times."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... Thank you, Whiskers. That's very kind of you."
-[[dialogue.clinic.meet_new_friend]]
-    character = "system"
-    text = "The vet calls Whiskers and his owner in for their appointment. Whiskers waves a paw at Banana Cat as they head in."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Whiskers"
-    text = "Whiskers: See you later, Banana Cat! Hope you feel better soon!"
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (waves a paw back)"
-[[dialogue.clinic.meet_new_friend]]
-    character = "system"
-    text = "You notice that Banana Cat seems a bit more relaxed after meeting Whiskers."
-[[dialogue.clinic.meet_new_friend]]
-    character = "You"
-    text = "You: It's always nice to make new friends, isn't it, Banana Cat?"
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... (nods and purrs contentedly)"
-[[dialogue.clinic.meet_new_friend]]
-    character = "system"
-    text = "Shortly after, the vet calls you and Banana Cat in for the check-up."
-[[dialogue.clinic.meet_new_friend]]
-    character = "You"
-    text = "You: Come on, Banana Cat. Let's go see the vet and make sure you're alright."
-[[dialogue.clinic.meet_new_friend]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow! (hops into your arms as you head into the vet's office)"
-
-
-[[dialogue.clinic.met_doctor]]
-    character = "system"
-    text = "You meet a polite cat. It kindly gives you some advice on treatment."
-    background = "clinic_met_doctor.jpg"
-[[dialogue.clinic.met_doctor]]
     character = "Polite_Cat"
-    text = "Polite Cat: How has Banana Cat been doing today?"
-[[dialogue.clinic.met_doctor]]
-    character = "You"
-    text = "You: About the same, unfortunately. I'm hoping we can get some good advice today."
-[[dialogue.clinic.met_doctor]]
-    character = "Polite_Cat"
-    text = "Polite Cat: Let's head to the examination room and have a closer look."
-[[dialogue.clinic.met_doctor]]
-    character = "system"
-    text = "You follow Polite Cat into a cozy examination room. Banana Cat looks around curiously."
-[[dialogue.clinic.met_doctor]]
-    character = "Polite_Cat"
-    text = "Polite Cat: Please place Banana Cat on the table."
-[[dialogue.clinic.met_doctor]]
-    character = "You"
-    text = "You: Alright, here we go, Banana Cat."
-[[dialogue.clinic.met_doctor]]
-    character = "system"
-    text = "Polite Cat gently examines Banana Cat, checking its eyes, ears, and overall condition."
-[[dialogue.clinic.met_doctor]]
-    character = "Polite_Cat"
-    text = "Polite Cat: Banana Cat seems to be in good spirits despite not feeling well. That's a good sign."
-[[dialogue.clinic.met_doctor]]
-    character = "Polite_Cat"
-    text = "Polite Cat: It needs some healthy snacks to recover."
-[[dialogue.clinic.met_doctor]]
+    text = "Polite Cat: Hello, I'm Polite Cat. Banana Cat looks like it needs some healthy snacks to recover."
+[[dialogue.clinic.arrived_clinic]]
     character = "You"
     text = "You: Healthy snacks? That sounds good."
-[[dialogue.clinic.met_doctor]]
+[[dialogue.clinic.arrived_clinic]]
     character = "Polite_Cat"
     text = "Polite Cat: Yes, these snacks contain special nutrients that can help it regain health."
-    [[dialogue.clinic.met_doctor.prompt]]
+    [[dialogue.clinic.arrived_clinic.prompt]]
     text = "Do you accept Polite Cat's advice for treatment, or do you reject it?"
-    [[dialogue.clinic.met_doctor.prompt]]
+    [[dialogue.clinic.arrived_clinic.prompt]]
         text = "Yes"
         next = "clinic.received_treatment"
-    [[dialogue.clinic.met_doctor.prompt]]
+    [[dialogue.clinic.arrived_clinic.prompt]]
         text = "Ignore"
-        next = "clinic.not_received_treatment"  # ending2 - 無效治療
+        next = "clinic.not_received_treatment" 
 
 
 [[dialogue.clinic.received_treatment]]
@@ -305,7 +130,7 @@
     character = "Polite_Cat"
     text = "Polite Cat: You're its owner; you know what's best for it."
 [[dialogue.clinic.not_received_treatment]]
-    character = "Banacat_Cat"
+    character = "Banana_Cat"
     text = "Banana Cat: Meow... I still feel a bit unwell."
 [[dialogue.clinic.not_received_treatment]]
     character = "You"
@@ -322,47 +147,17 @@
 [[dialogue.park.arrived_park]]
     character = "system"
     text = "In the park, you meet a standing punishment cat. It looks like it needs some help."
-[[dialogue.park.join_game]]
+[[dialogue.park.arrived_park]]
     character = "Standing_Punishment_Cat"
     text = "Standing Punishment Cat: Hi, I'm Standing Punishment Cat. Do you want to play a game with me?"
     [[dialogue.park.arrived_park.prompt]]
         text = "Do you want to join the game with Standing Punishment Cat?"
     [[dialogue.park.arrived_park.prompt]]
         text = "Join the game"
-        next = "park.join_game"  # ending3 - Happy Ending
+        next = "park.join_game" 
     [[dialogue.park.arrived_park.prompt]]
         text = "Ignore"
-        next = "park.not_join_game"  # ending1 - 未完成任務結局
-
-
-[[dialogue.park.join_game]]
-    character = "You"
-    text = "You: Let play the game with Standing Punishment Cat."
-[[dialogue.park.join_game]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... I'm a bit tired, but maybe playing will help."
-[[dialogue.park.join_game]]
-    character = "You"
-    text = "You: We can give it a try; it might improve your mood."
-[[dialogue.park.join_game]]
-    character = "Banana Cat"
-    text = "Banana Cat: Meow... okay, I'll try."
-    next = "park.play_game"
-
-
-[[dialogue.park.not_join_game]]
-    character = "You"
-    text = "You: You look tired, let leave the park"
-[[dialogue.park.not_join_game]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... I'm really tired. Maybe next time."
-[[dialogue.park.not_join_game]]
-    character = "You"
-    text = "You: That's okay, Banana Cat. Rest up and we can play another time."
-[[dialogue.park.not_join_game]]
-    character = "Standing_Punishment_Cat"
-    text = "Standing Punishment Cat: No worries, there's always another chance. Take care, Banana Cat."
-    next = "park.playing_alone"
+        next = "park.not_join_game" 
 
 
 [[dialogue.park.join_game]]
@@ -382,7 +177,6 @@
 [[dialogue.park.not_join_game]]
     character = "You"
     text = "You: You look tired, let leave the park"
-    background = "park_playing_alone"
 [[dialogue.park.not_join_game]]
     character = "Banana_Cat"
     text = "Banana Cat: Meow... I'm really tired. Maybe next time."
@@ -493,7 +287,6 @@
 [[dialogue.ending.1]]
     character = "system"
     text = "Banana Cat's mood doesn't improve."
-    background = "ending1.jpg"
 [[dialogue.ending.1]]
     character = "You"
     text = "You: Banana Cat still looks a bit unhappy."
@@ -515,7 +308,6 @@
 [[dialogue.ending.2]]
     character = "system"
     text = "Banana Cat's mood slightly improves after using 1 special item."
-    background = "ending2.jpg"
 [[dialogue.ending.2]]
     character = "You"
     text = "You: Banana Cat, you look a bit happier now."
@@ -536,7 +328,6 @@
 [[dialogue.ending.3]]
     character = "system"
     text = "After using a 2 special items, Banana Cat's mood improves significantly."
-    background = "ending3.jpg"
 [[dialogue.ending.3]]
     character = "You"
     text = "You: Banana Cat, you look so much happier now!"
@@ -553,9 +344,3 @@
     character = "Banana_Cat"
     text = "Banana Cat: Meow! Yes, let's do that! Thank you for cheering me up!"
     next = "finish"
-
-
-
-
-    
-

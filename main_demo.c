@@ -12,8 +12,8 @@
 char *dialogueKeys[] = {"home", "clinic", "park", "ending"};
 char *sectionKeys[][7] = 
 {
-    {"start", "before_finding_banana_cat", "found_crying_cat", "pick_up_smoothing_ball", "ignore_smoothing_ball", "\0", "\0"},
-    {"arrived_clinic", "meet_new_friend", "met_doctor", "received_treatment", "not_received_treatment", "\0", "\0"},
+    {"start", "found_crying_cat", "pick_up_smoothing_ball", "ignore_smoothing_ball", "\0", "\0", "\0"},
+    {"arrived_clinic", "received_treatment", "not_received_treatment", "\0", "\0", "\0", "\0"},
     {"arrived_park", "join_game", "not_join_game", "play_game", "playing_hide_and_seek", "playing_alone", "playing_tag"},
     {"1", "2", "3"}
 };
@@ -54,7 +54,7 @@ int main()
     char errbuf[200];
 
     // 1. Read and parse toml file
-    fp = fopen("script.toml", "r");
+    fp = fopen("script_demo.toml", "r");
     if (!fp) {
         error("cannot open script.toml - ", strerror(errno));
     }
