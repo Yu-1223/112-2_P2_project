@@ -18,6 +18,8 @@ char *sectionKeys[][7] =
     {"1", "2", "3"}
 };
 
+char *backpackString[] = {"Smothing ball", "healthy snack", "Smothing ball, healthy snack", " "};
+
 // Error handling function
 void error(const char* msg, const char* detail) 
 {
@@ -92,6 +94,7 @@ int main()
     int32_t usedItem1 = 0;
     int32_t usedItem2 = 0;
     int32_t affectionPoint = 0;
+    char *backpackItemList =backpackString[3];
 
     display_interface("", "", 0, "", "", "", "");
 
@@ -141,10 +144,19 @@ int main()
                 if(strcmp(key, "pick_up_smoothing_ball") == 0 && usedItem1 == 0)
                 {
                     haveItem1 = 1;
+                    backpackItemList = backpackString[0];
                 }
                 if(strcmp(key, "received_treatment") == 0 && usedItem2 == 0)
                 {
                     haveItem2 = 1;
+                    if(haveItem1 == 0)
+                    {
+                        backpackItemList = backpackString[1];
+                    }
+                    else
+                    {
+                        backpackItemList = backpackString[2];
+                    }
                 }
 
                 array = toml_array_in(section, key);
@@ -167,25 +179,44 @@ int main()
                             if(haveItem1 == 0 && haveItem2 == 0)
                             {
                                 backpackImage = "";
+                                backpackItemList = backpackString[3];
                             }
                             else if(haveItem1 == 1 && haveItem2 == 0)
                             {
                                 backpackImage = "";
+                                backpackItemList = backpackString[0];
                             }
                             else if(haveItem1 == 0 && haveItem2 == 1)
                             {
                                 backpackImage = "";
+                                backpackItemList = backpackString[1];
                             }
                             else if(haveItem1 == 1 && haveItem2 == 1)
                             {
                                 backpackImage = "";
+                                backpackItemList = backpackString[2];
                             }
 
-                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or chooes to apply item!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or chooes to apply item!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
 
                             do
                             {
-                                userOptions = get_option("item1", "item2");
+                                if(haveItem1 == 0 && haveItem2 == 0)
+                                {
+                                    userOptions = get_option("", "");
+                                }
+                                else if(haveItem1 == 1 && haveItem2 == 0)
+                                {
+                                    userOptions = get_option("Smoothing ball", "");
+                                }
+                                else if(haveItem1 == 0 && haveItem2 == 1)
+                                {
+                                    userOptions = get_option("", "Healthy snack");
+                                }
+                                else if(haveItem1 == 1 && haveItem2 == 1)
+                                {
+                                    userOptions = get_option("Smoothing ball", "Healthy snack");
+                                }
 
                             }while(userOptions != 1 && userOptions != 2 && userOptions != 4);
 
@@ -193,14 +224,23 @@ int main()
                             {
                                 if(haveItem1 == 1)
                                 {
-                                    display_interface(backpackImage, "item 1 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item 1 applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                     haveItem1 = 0;
                                     usedItem1 = 1;
                                     affectionPoint += 10;
+
+                                    if(haveItem2 == 0)
+                                    {
+                                        backpackItemList = backpackString[3];
+                                    }
+                                    else
+                                    {
+                                        backpackItemList = backpackString[1];
+                                    }
                                 }
                                 else
                                 {
-                                    display_interface(backpackImage, "item 1 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item 1 not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                 }
                                 sleep(1);
                             }
@@ -208,20 +248,29 @@ int main()
                             {
                                 if(haveItem2 == 1)
                                 {
-                                    display_interface(backpackImage, "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item 2 applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                     haveItem2 = 0;
                                     usedItem2 = 1;
                                     affectionPoint += 10;
+
+                                    if(haveItem1 == 0)
+                                    {
+                                        backpackItemList = backpackString[3];
+                                    }
+                                    else
+                                    {
+                                        backpackItemList = backpackString[0];
+                                    }
                                 }
                                 else
                                 {
-                                    display_interface(backpackImage, "item 2 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item 2 not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                 }
                                 sleep(1);
                             }
                             else if(userOptions == 4)
                             {
-                                display_interface(backpackImage, "backpack Closed!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                 sleep(1);
                             }
 
@@ -255,7 +304,7 @@ int main()
                                         printf("Character: %s, Text: %s\n", character, text);
                                     #endif 
 
-                                    display_interface((char *)image + 1, (char *)text, userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface((char *)image + 1, (char *)text, userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                 }
 
                                 const char* next = toml_raw_in(subtable, "next");
@@ -345,25 +394,44 @@ int main()
                                             if(haveItem1 == 0 && haveItem2 == 0)
                                             {
                                                 backpackImage = "";
+                                                backpackItemList = backpackString[3];
                                             }
                                             else if(haveItem1 == 1 && haveItem2 == 0)
                                             {
                                                 backpackImage = "";
+                                                backpackItemList = backpackString[0];
                                             }
                                             else if(haveItem1 == 0 && haveItem2 == 1)
                                             {
                                                 backpackImage = "";
+                                                backpackItemList = backpackString[1];
                                             }
                                             else if(haveItem1 == 1 && haveItem2 == 1)
                                             {
                                                 backpackImage = "";
+                                                backpackItemList = backpackString[2];
                                             }
 
-                                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or chooes to apply item!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or chooes to apply item!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
 
                                             do
                                             {
-                                                userOptions = get_option("item1", "item2");
+                                                if(haveItem1 == 0 && haveItem2 == 0)
+                                                {
+                                                    userOptions = get_option("", "");
+                                                }
+                                                else if(haveItem1 == 1 && haveItem2 == 0)
+                                                {
+                                                    userOptions = get_option("Smoothing ball", "");
+                                                }
+                                                else if(haveItem1 == 0 && haveItem2 == 1)
+                                                {
+                                                    userOptions = get_option("", "Healthy snack");
+                                                }
+                                                else if(haveItem1 == 1 && haveItem2 == 1)
+                                                {
+                                                    userOptions = get_option("Smoothing ball", "Healthy snack");
+                                                }
 
                                             }while(userOptions != 1 && userOptions != 2 && userOptions != 4);
 
@@ -371,14 +439,23 @@ int main()
                                             {
                                                 if(haveItem1 == 1)
                                                 {
-                                                    display_interface(backpackImage, "item 1 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item 1 applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                                     haveItem1 = 0;
                                                     usedItem1 = 1;
                                                     affectionPoint += 10;
+
+                                                    if(haveItem2 == 0)
+                                                    {
+                                                        backpackItemList = backpackString[3];
+                                                    }
+                                                    else
+                                                    {
+                                                        backpackItemList = backpackString[1];
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    display_interface(backpackImage, "item 1 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item 1 not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                                 }
                                                 sleep(1);
                                             }
@@ -386,20 +463,29 @@ int main()
                                             {
                                                 if(haveItem2 == 1)
                                                 {
-                                                    display_interface(backpackImage, "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item 2 applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                                     haveItem2 = 0;
                                                     usedItem2 = 1;
                                                     affectionPoint += 10;
+
+                                                    if(haveItem1 == 0)
+                                                    {
+                                                        backpackItemList = backpackString[3];
+                                                    }
+                                                    else
+                                                    {
+                                                        backpackItemList = backpackString[0];
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    display_interface(backpackImage, "item 2 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item 2 not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                                 }
                                                 sleep(1);
                                             }
                                             else if(userOptions == 4)
                                             {
-                                                display_interface(backpackImage, "backpack Closed!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                                 sleep(1);
                                             }
 
@@ -409,7 +495,7 @@ int main()
                                         // display prompt text
                                         if(userOptions == 3)
                                         {
-                                            display_interface((char *)image + 1, (char *)promptQ, userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                            display_interface((char *)image + 1, (char *)promptQ, userOptions, backpackItemList, "Sad", "Happy", "Boring");
                                         }
                                     }
 
