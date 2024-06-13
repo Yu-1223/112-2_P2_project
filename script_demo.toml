@@ -163,6 +163,7 @@
 [[dialogue.park.join_game]]
     character = "You"
     text = "You: Let play the game with Standing Punishment Cat."
+    background = "join_game.jpg"
 [[dialogue.park.join_game]]
     character = "Banana_Cat"
     text = "Banana Cat: Meow... I'm a bit tired, but maybe playing will help."
@@ -177,6 +178,7 @@
 [[dialogue.park.not_join_game]]
     character = "You"
     text = "You: You look tired, let leave the park"
+    background = "not_join_game.jpg"
 [[dialogue.park.not_join_game]]
     character = "Banana_Cat"
     text = "Banana Cat: Meow... I'm really tired. Maybe next time."
