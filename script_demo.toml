@@ -188,7 +188,7 @@
 [[dialogue.park.not_join_game]]
     character = "Standing_Punishment_Cat"
     text = "Standing Punishment Cat: No worries, there's always another chance. Take care, Banana Cat."
-    next = "park.play_alone"
+    next = "park.playing_alone"
 
 [[dialogue.park.play_game]]
     character = "You"
@@ -349,3 +349,4 @@
     character = "Banana_Cat"
     text = "Banana Cat: Meow! Yes, let's do that! Thank you for cheering me up!"
     next = "finish"
+    
