@@ -267,7 +267,7 @@ int main()
                             {
                                 if(haveItem1 == 1)
                                 {
-                                    display_interface(backpackImage, "item 1 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                     haveItem1 = 0;
                                     usedItem1 = 1;
                                     affectionPoint += 10;
@@ -283,7 +283,7 @@ int main()
                                 }
                                 else
                                 {
-                                    display_interface(backpackImage, "item 1 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                 }
                                 sleep(1);
                             }
@@ -291,7 +291,7 @@ int main()
                             {
                                 if(haveItem2 == 1)
                                 {
-                                    display_interface(backpackImage, "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                     haveItem2 = 0;
                                     usedItem2 = 1;
                                     affectionPoint += 10;
@@ -307,7 +307,7 @@ int main()
                                 }
                                 else
                                 {
-                                    display_interface(backpackImage, "item 2 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                 }
                                 sleep(1);
                             }
@@ -492,7 +492,7 @@ int main()
                                             {
                                                 if(haveItem1 == 1)
                                                 {
-                                                    display_interface(backpackImage, "item 1 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                                     haveItem1 = 0;
                                                     usedItem1 = 1;
                                                     affectionPoint += 10;
@@ -508,7 +508,7 @@ int main()
                                                 }
                                                 else
                                                 {
-                                                    display_interface(backpackImage, "item 1 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                                 }
                                                 sleep(1);
                                             }
@@ -516,7 +516,7 @@ int main()
                                             {
                                                 if(haveItem2 == 1)
                                                 {
-                                                    display_interface(backpackImage, "item 2 applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item applied success!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                                     haveItem2 = 0;
                                                     usedItem2 = 1;
                                                     affectionPoint += 10;
@@ -532,7 +532,7 @@ int main()
                                                 }
                                                 else
                                                 {
-                                                    display_interface(backpackImage, "item 2 not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item not found!", userOptions, "Soothing ball", "Sad", "Happy", "Boring");
                                                 }
                                                 sleep(1);
                                             }
