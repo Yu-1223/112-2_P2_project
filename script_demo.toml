@@ -289,6 +289,7 @@
 [[dialogue.ending.1]]
     character = "system"
     text = "Banana Cat's mood doesn't improve."
+    background = "ending1.jpg"
 [[dialogue.ending.1]]
     character = "You"
     text = "You: Banana Cat still looks a bit unhappy."
@@ -310,6 +311,7 @@
 [[dialogue.ending.2]]
     character = "system"
     text = "Banana Cat's mood slightly improves after using 1 special item."
+    background = "ending2.jpg"
 [[dialogue.ending.2]]
     character = "You"
     text = "You: Banana Cat, you look a bit happier now."
@@ -330,6 +332,7 @@
 [[dialogue.ending.3]]
     character = "system"
     text = "After using a 2 special items, Banana Cat's mood improves significantly."
+    background = "ending3.jpg"
 [[dialogue.ending.3]]
     character = "You"
     text = "You: Banana Cat, you look so much happier now!"
