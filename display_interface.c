@@ -85,7 +85,7 @@ int get_option(char *button1, char *button2){
     return option;
 }
 
-void display_interface(char *image, char *dialogue, int options, char *bag_item, char *crying_cat, char *banana_cat, char *polite_cat) {
+void display_interface(char *image, char *dialogue, int options, char *bag_item, int32_t affection_point) {
     // Initialize ncurses
     initscr();
     start_color(); // Start color functionality
@@ -119,7 +119,7 @@ void display_interface(char *image, char *dialogue, int options, char *bag_item,
     }
 
     // Create the bag window
-    WINDOW* bagwin = newwin(max_y / 6, max_x / 4, 0, 3 * max_x / 4);
+    WINDOW* bagwin = newwin(max_y / 3, max_x / 4, 0, 3 * max_x / 4);
     wattron(bagwin, COLOR_PAIR(2)); // Turn on color attribute
     box(bagwin, 0, 0); // Draw the box with the color attribute on
     wattroff(bagwin, COLOR_PAIR(2)); // Turn off color attribute
@@ -127,26 +127,12 @@ void display_interface(char *image, char *dialogue, int options, char *bag_item,
     mvwprintw(bagwin, 2, 2, "%s", bag_item);
     wrefresh(bagwin);
 
-    // Create the "Character1" window
-    WINDOW* char1win = newwin(max_y / 6, max_x / 4, max_y / 6, 3 * max_x / 4);
+    // Create the affection point window
+    WINDOW* char1win = newwin(max_y / 3, max_x / 4, max_y / 3, 3 * max_x / 4);
     box(char1win, 0, 0);
-    mvwprintw(char1win, 0, 2, "Crying Cat");
-    mvwprintw(char1win, 2, 2, "%s", crying_cat);
+    mvwprintw(char1win, 0, 2, "Affection Point");
+    mvwprintw(char1win, 2, 2, "%d", affection_point);
     wrefresh(char1win);
-
-    // Create the "Character2" window
-    WINDOW* char2win = newwin(max_y / 6, max_x / 4, 2 * max_y / 6, 3 * max_x / 4);
-    box(char2win, 0, 0);
-    mvwprintw(char2win, 0, 2, "Banana Cat");
-    mvwprintw(char2win, 2, 2, "%s", banana_cat);
-    wrefresh(char2win);
-
-    // Create the "Character3" window
-    WINDOW* char3win = newwin(max_y / 6, max_x / 4, 3 * max_y / 6, 3 * max_x / 4);
-    box(char3win, 0, 0);
-    mvwprintw(char3win, 0, 2, "Polite Cat");
-    mvwprintw(char3win, 2, 2, "%s", polite_cat);
-    wrefresh(char3win);
 
     // Create the dialogue line window
     WINDOW* dialogwin = newwin(2 * max_y / 9, max_x, 4 * max_y / 6, 0);
