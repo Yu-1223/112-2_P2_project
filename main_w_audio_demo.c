@@ -14,10 +14,10 @@
 char *dialogueKeys[] = {"home", "clinic", "park", "ending"};
 char *sectionKeys[][7] = 
 {
-    {"start", "before_finding_banana_cat", "found_crying_cat", "pick_up_smoothing_ball", "ignore_smoothing_ball", "\0", "\0"},
-    {"arrived_clinic", "meet_new_friend", "met_doctor", "received_treatment", "not_received_treatment", "\0", "\0"},
+    {"start", "found_banana_cat", "pick_up_smoothing_ball", "ignore_smoothing_ball", "\n", "\n", "\n"},
+    {"arrived_clinic", "received_treatment", "not_received_treatment", "\n", "\n", "\n", "\n"},
     {"arrived_park", "join_game", "not_join_game", "play_game", "playing_hide_and_seek", "playing_alone", "playing_tag"},
-    {"1", "2", "3"}
+    {"1", "2", "3", "\n", "\n", "\n", "\n"}
 };
 
 char *backpackString[] = {"Smothing ball", "healthy snack", "Smothing ball, healthy snack", " "};
