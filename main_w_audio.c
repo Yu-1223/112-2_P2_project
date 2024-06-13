@@ -129,7 +129,7 @@ int main()
     int32_t affectionPoint = 0;
     char *backpackItemList = backpackString[3];
 
-    display_interface("", "", 0, "", "", "", "");
+    display_interface("", "", 0, "", 0);
 
     // iterate through every scene ("home", "clinic", "park", "ending")
     for(int32_t i = 0 ; (dialogueKey = toml_key_in(dialogue, i)); i++) 
@@ -240,7 +240,7 @@ int main()
                                 backpackItemList = backpackString[2];
                             }
 
-                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or choose to apply item!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or choose to apply item!", userOptions, backpackItemList, affectionPoint);
 
                             do
                             {
@@ -267,7 +267,7 @@ int main()
                             {
                                 if(haveItem1 == 1)
                                 {
-                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, affectionPoint);
                                     haveItem1 = 0;
                                     usedItem1 = 1;
                                     affectionPoint += 10;
@@ -283,7 +283,7 @@ int main()
                                 }
                                 else
                                 {
-                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, affectionPoint);
                                 }
                                 sleep(1);
                             }
@@ -291,7 +291,7 @@ int main()
                             {
                                 if(haveItem2 == 1)
                                 {
-                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, affectionPoint);
                                     haveItem2 = 0;
                                     usedItem2 = 1;
                                     affectionPoint += 10;
@@ -307,13 +307,13 @@ int main()
                                 }
                                 else
                                 {
-                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, affectionPoint);
                                 }
                                 sleep(1);
                             }
                             else if(userOptions == 4)
                             {
-                                display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, affectionPoint);
                                 play_sound(backpackCloseSound); // 播放背包關閉音效
                                 sleep(1);
                             }
@@ -348,7 +348,7 @@ int main()
                                         printf("Character: %s, Text: %s\n", character, text);
                                     #endif 
 
-                                    display_interface((char *)image + 1, (char *)text, userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                    display_interface((char *)image + 1, (char *)text, userOptions, backpackItemList, affectionPoint);
                                 }
 
                                 const char* next = toml_raw_in(subtable, "next");
@@ -465,7 +465,7 @@ int main()
                                                 backpackItemList = backpackString[2];
                                             }
 
-                                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or choose to apply item!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                            display_interface(backpackImage, "backpack Opened! Press \"b\" again to close or choose to apply item!", userOptions, backpackItemList, affectionPoint);
 
                                             do
                                             {
@@ -492,7 +492,7 @@ int main()
                                             {
                                                 if(haveItem1 == 1)
                                                 {
-                                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, affectionPoint);
                                                     haveItem1 = 0;
                                                     usedItem1 = 1;
                                                     affectionPoint += 10;
@@ -508,7 +508,7 @@ int main()
                                                 }
                                                 else
                                                 {
-                                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, affectionPoint);
                                                 }
                                                 sleep(1);
                                             }
@@ -516,7 +516,7 @@ int main()
                                             {
                                                 if(haveItem2 == 1)
                                                 {
-                                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item applied success!", userOptions, backpackItemList, affectionPoint);
                                                     haveItem2 = 0;
                                                     usedItem2 = 1;
                                                     affectionPoint += 10;
@@ -532,13 +532,13 @@ int main()
                                                 }
                                                 else
                                                 {
-                                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                                    display_interface(backpackImage, "item not found!", userOptions, backpackItemList, affectionPoint);
                                                 }
                                                 sleep(1);
                                             }
                                             else if(userOptions == 4)
                                             {
-                                                display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                                display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, affectionPoint);
                                                 play_sound(backpackCloseSound); // 播放背包關閉音效
                                                 sleep(1);
                                             }
@@ -549,7 +549,7 @@ int main()
                                         // display prompt text
                                         if(userOptions == 3)
                                         {
-                                            display_interface((char *)image + 1, (char *)promptQ, userOptions, backpackItemList, "Sad", "Happy", "Boring");
+                                            display_interface((char *)image + 1, (char *)promptQ, userOptions, backpackItemList, affectionPoint);
                                         }
                                     }
 
