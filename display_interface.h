@@ -1,3 +1,3 @@
 #pragma once
-    int get_option();
-    void display_interface(char *image, char *dialogue, int options, char *bag_item, char *crying_cat, char *banana_cat, char *polite_cat);
+    int get_option(char *button1, char *button2);
+    void display_interface(char *image, char *dialogue, int options, char *bag_item, int32_t affection_point);
