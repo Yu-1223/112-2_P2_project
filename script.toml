@@ -338,6 +338,7 @@
 [[dialogue.park.join_game]]
     character = "You"
     text = "You: Let play the game with Standing Punishment Cat."
+    background = "join_game.jpg"
 [[dialogue.park.join_game]]
     character = "Banana_Cat"
     text = "Banana Cat: Meow... I'm a bit tired, but maybe playing will help."
@@ -353,6 +354,7 @@
 [[dialogue.park.not_join_game]]
     character = "You"
     text = "You: You look tired, let leave the park"
+    background = "not_join_game.jpg"
 [[dialogue.park.not_join_game]]
     character = "Banana_Cat"
     text = "Banana Cat: Meow... I'm really tired. Maybe next time."
@@ -363,36 +365,6 @@
     character = "Standing_Punishment_Cat"
     text = "Standing Punishment Cat: No worries, there's always another chance. Take care, Banana Cat."
     next = "park.playing_alone"
-
-
-[[dialogue.park.join_game]]
-    character = "You"
-    text = "You: Let play the game with Standing Punishment Cat."
-[[dialogue.park.join_game]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... I'm a bit tired, but maybe playing will help."
-[[dialogue.park.join_game]]
-    character = "You"
-    text = "You: We can give it a try; it might improve your mood."
-[[dialogue.park.join_game]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... okay, I'll try."
-    next = "park.play_game"
-
-[[dialogue.park.not_join_game]]
-    character = "You"
-    text = "You: You look tired, let leave the park"
-    background = "park_playing_alone"
-[[dialogue.park.not_join_game]]
-    character = "Banana_Cat"
-    text = "Banana Cat: Meow... I'm really tired. Maybe next time."
-[[dialogue.park.not_join_game]]
-    character = "You"
-    text = "You: That's okay, Banana Cat. Rest up and we can play another time."
-[[dialogue.park.not_join_game]]
-    character = "Standing_Punishment_Cat"
-    text = "Standing Punishment Cat: No worries, there's always another chance. Take care, Banana Cat."
-    next = "park.play_alone"
 
 [[dialogue.park.play_game]]
     character = "You"
