@@ -75,11 +75,11 @@ int main()
     }
 
     // 加載音效檔案
-    Mix_Chunk *homeMusic = Mix_LoadWAV("/path/to/home_music.wav");
-    Mix_Chunk *clinicMusic = Mix_LoadWAV("/path/to/clinic_music.wav");
-    Mix_Chunk *parkMusic = Mix_LoadWAV("/path/to/park_music.wav");
-    Mix_Chunk *backpackOpenSound = Mix_LoadWAV("/path/to/backpack_open.wav");
-    Mix_Chunk *backpackCloseSound = Mix_LoadWAV("/path/to/backpack_close.wav");
+    Mix_Chunk *homeMusic = Mix_LoadWAV("./audio/home_music.wav");
+    Mix_Chunk *clinicMusic = Mix_LoadWAV("./audio/clinic_music.wav");
+    Mix_Chunk *parkMusic = Mix_LoadWAV("./audio/park_music.wav");
+    Mix_Chunk *backpackOpenSound = Mix_LoadWAV("./audio/backpack_open.wav");
+    Mix_Chunk *backpackCloseSound = Mix_LoadWAV("./audio/backpack_close.wav");
 
     if (!homeMusic || !clinicMusic || !parkMusic || !backpackOpenSound || !backpackCloseSound) {
         error("Failed to load sound! SDL_mixer Error: ", Mix_GetError());
@@ -221,22 +221,22 @@ int main()
 
                             if(haveItem1 == 0 && haveItem2 == 0)
                             {
-                                backpackImage = "";
+                                backpackImage = "./image/backpack_empty.jpeg";
                                 backpackItemList = backpackString[3];
                             }
                             else if(haveItem1 == 1 && haveItem2 == 0)
                             {
-                                backpackImage = "";
+                                backpackImage = "./image/backpack_ball.jpeg";
                                 backpackItemList = backpackString[0];
                             }
                             else if(haveItem1 == 0 && haveItem2 == 1)
                             {
-                                backpackImage = "";
+                                backpackImage = "./image/backpack_food.jpeg";
                                 backpackItemList = backpackString[1];
                             }
                             else if(haveItem1 == 1 && haveItem2 == 1)
                             {
-                                backpackImage = "";
+                                backpackImage = "./image/backpack_ball_food.jpeg";
                                 backpackItemList = backpackString[2];
                             }
 
@@ -446,22 +446,22 @@ int main()
 
                                             if(haveItem1 == 0 && haveItem2 == 0)
                                             {
-                                                backpackImage = "";
+                                                backpackImage = "./image/backpack_empty.jpeg";
                                                 backpackItemList = backpackString[3];
                                             }
                                             else if(haveItem1 == 1 && haveItem2 == 0)
                                             {
-                                                backpackImage = "";
+                                                backpackImage = "./image/backpack_ball.jpeg";
                                                 backpackItemList = backpackString[0];
                                             }
                                             else if(haveItem1 == 0 && haveItem2 == 1)
                                             {
-                                                backpackImage = "";
+                                                backpackImage = "./image/backpack_food.jpeg";
                                                 backpackItemList = backpackString[1];
                                             }
                                             else if(haveItem1 == 1 && haveItem2 == 1)
                                             {
-                                                backpackImage = "";
+                                                backpackImage = "./image/backpack_ball_food.jpeg";
                                                 backpackItemList = backpackString[2];
                                             }
 
