@@ -14,13 +14,13 @@
 char *dialogueKeys[] = {"home", "clinic", "park", "ending"};
 char *sectionKeys[][7] = 
 {
-    {"start", "found_banana_cat", "pick_up_smoothing_ball", "ignore_smoothing_ball", "\n", "\n", "\n"},
-    {"arrived_clinic", "received_treatment", "not_received_treatment", "\n", "\n", "\n", "\n"},
+    {"start", "found_crying_cat", "pick_up_smoothing_ball", "ignore_smoothing_ball", "\0", "\0", "\0"},
+    {"arrived_clinic", "received_treatment", "not_received_treatment", "\0", "\0", "\0", "\0"},
     {"arrived_park", "join_game", "not_join_game", "play_game", "playing_hide_and_seek", "playing_alone", "playing_tag"},
-    {"1", "2", "3", "\n", "\n", "\n", "\n"}
+    {"1", "2", "3"}
 };
 
-char *backpackString[] = {"Smothing ball", "healthy snack", "Smothing ball, healthy snack", " "};
+char *backpackString[] = {"Smoothing ball", "healthy snack", "Smoothing ball, healthy snack", " "};
 
 // Error handling function
 void error(const char* msg, const char* detail) 
@@ -38,6 +38,7 @@ int32_t getDialogueIndex(const char *dialogueKey)
             return i;
         }
     }
+    return -1;
 }
 
 int32_t getSectionIndex(int32_t dialogueIndex, const char *sectionKey)
@@ -49,18 +50,41 @@ int32_t getSectionIndex(int32_t dialogueIndex, const char *sectionKey)
             return i;
         }
     }
+    return -1;
 }
 
+// 播放音效函數
 void play_sound(Mix_Chunk *sound) {
     int channel = Mix_PlayChannel(-1, sound, 0);
     if (channel == -1) {
         fprintf(stderr, "Failed to play sound! SDL_mixer Error: %s\n", Mix_GetError());
     }
+}
 
-    while (Mix_Playing(channel) != 0) {
-        SDL_Delay(100); // 每 100 毫秒檢查一次音效是否播放結束
+// 播放音效函數，不停止背景音樂
+void play_sound_effect(Mix_Chunk *sound) {
+    int channel = Mix_PlayChannel(-1, sound, 0);
+    if (channel == -1) {
+        fprintf(stderr, "Failed to play sound effect! SDL_mixer Error: %s\n", Mix_GetError());
     }
 }
+
+// 停止當前播放的背景音樂
+void stop_music() {
+    Mix_HaltMusic();
+}
+
+// 播放背景音樂函數，避免重疊播放
+void play_background_music(Mix_Music *music, Mix_Music **currentMusic) {
+    if (*currentMusic != music) {
+        stop_music();
+        *currentMusic = music;
+        if (Mix_PlayMusic(music, -1) == -1) {
+            fprintf(stderr, "Failed to play background music! SDL_mixer Error: %s\n", Mix_GetError());
+        }
+    }
+}
+
 
 int main() 
 {
@@ -75,21 +99,29 @@ int main()
     }
 
     // 加載音效檔案
-    Mix_Chunk *homeMusic = Mix_LoadWAV("./audio/home_music.wav");
-    Mix_Chunk *clinicMusic = Mix_LoadWAV("./audio/clinic_music.wav");
-    Mix_Chunk *parkMusic = Mix_LoadWAV("./audio/park_music.wav");
     Mix_Chunk *backpackOpenSound = Mix_LoadWAV("./audio/backpack_open.wav");
     Mix_Chunk *backpackCloseSound = Mix_LoadWAV("./audio/backpack_close.wav");
 
-    if (!homeMusic || !clinicMusic || !parkMusic || !backpackOpenSound || !backpackCloseSound) {
+    if (!backpackOpenSound || !backpackCloseSound) {
         error("Failed to load sound! SDL_mixer Error: ", Mix_GetError());
     }
+
+    // 加載背景音樂檔案
+    Mix_Music *homeMusic = Mix_LoadMUS("./audio/home_music.wav");
+    Mix_Music *clinicMusic = Mix_LoadMUS("./audio/clinic_music.wav");
+    Mix_Music *parkMusic = Mix_LoadMUS("./audio/park_music.wav");
+
+    if (!homeMusic || !clinicMusic || !parkMusic) {
+        error("Failed to load music! SDL_mixer Error: ", Mix_GetError());
+    }
+
+    Mix_Music *currentMusic = NULL; // 用於追踪當前播放的音樂
 
     FILE* fp;
     char errbuf[200];
 
     // 1. Read and parse toml file
-    fp = fopen("script.toml", "r");
+    fp = fopen("script_demo.toml", "r");
     if (!fp) {
         error("cannot open script.toml - ", strerror(errno));
     }
@@ -134,7 +166,7 @@ int main()
     // iterate through every scene ("home", "clinic", "park", "ending")
     for(int32_t i = 0 ; (dialogueKey = toml_key_in(dialogue, i)); i++) 
     {
-
+        
         if(jumpFlag == 1)
         {
             dialogueKey = desString;
@@ -146,11 +178,11 @@ int main()
 
         // 播放場景音樂
         if (strcmp(dialogueKey, "home") == 0) {
-            play_sound(homeMusic);
+            play_background_music(homeMusic, &currentMusic);
         } else if (strcmp(dialogueKey, "clinic") == 0) {
-            play_sound(clinicMusic);
+            play_background_music(clinicMusic, &currentMusic);
         } else if (strcmp(dialogueKey, "park") == 0) {
-            play_sound(parkMusic);
+            play_background_music(parkMusic, &currentMusic);
         }
 
         const toml_table_t* section = toml_table_in(dialogue, dialogueKey);
@@ -189,7 +221,6 @@ int main()
                 if(strcmp(key, "received_treatment") == 0 && usedItem2 == 0)
                 {
                     haveItem2 = 1;
-
                     if(haveItem1 == 0)
                     {
                         backpackItemList = backpackString[1];
@@ -217,7 +248,7 @@ int main()
 
                         if(userOptions == 4) // open backpack
                         {
-                            play_sound(backpackOpenSound); // 播放背包打開音效
+                            play_sound_effect(backpackOpenSound); // 播放背包打開音效
 
                             if(haveItem1 == 0 && haveItem2 == 0)
                             {
@@ -314,7 +345,7 @@ int main()
                             else if(userOptions == 4)
                             {
                                 display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, affectionPoint);
-                                play_sound(backpackCloseSound); // 播放背包關閉音效
+                                play_sound_effect(backpackCloseSound); // 播放背包關閉音效
                                 sleep(1);
                             }
 
@@ -378,9 +409,9 @@ int main()
                                         // Clear windows
                                         system("clear");
                                         // Exit program
-                                        Mix_FreeChunk(homeMusic);
-                                        Mix_FreeChunk(clinicMusic);
-                                        Mix_FreeChunk(parkMusic);
+                                        Mix_FreeMusic(homeMusic);
+                                        Mix_FreeMusic(clinicMusic);
+                                        Mix_FreeMusic(parkMusic);
                                         Mix_FreeChunk(backpackOpenSound);
                                         Mix_FreeChunk(backpackCloseSound);
                                         Mix_CloseAudio();
@@ -442,7 +473,7 @@ int main()
 
                                         if(userOptions == 4) // open backpack
                                         {
-                                            play_sound(backpackOpenSound); // 播放背包打開音效
+                                            play_sound_effect(backpackOpenSound); // 播放背包打開音效
 
                                             if(haveItem1 == 0 && haveItem2 == 0)
                                             {
@@ -539,7 +570,7 @@ int main()
                                             else if(userOptions == 4)
                                             {
                                                 display_interface(backpackImage, "backpack Closed!", userOptions, backpackItemList, affectionPoint);
-                                                play_sound(backpackCloseSound); // 播放背包關閉音效
+                                                play_sound_effect(backpackCloseSound); // 播放背包關閉音效
                                                 sleep(1);
                                             }
 
@@ -634,9 +665,9 @@ int main()
     toml_free(conf);
 
     // 釋放資源並關閉 SDL_mixer 和 SDL
-    Mix_FreeChunk(homeMusic);
-    Mix_FreeChunk(clinicMusic);
-    Mix_FreeChunk(parkMusic);
+    Mix_FreeMusic(homeMusic);
+    Mix_FreeMusic(clinicMusic);
+    Mix_FreeMusic(parkMusic);
     Mix_FreeChunk(backpackOpenSound);
     Mix_FreeChunk(backpackCloseSound);
     Mix_CloseAudio();
