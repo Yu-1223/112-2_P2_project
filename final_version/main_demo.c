@@ -394,11 +394,11 @@ int main()
                                 const char* character = toml_raw_in(subtable, "character");
                                 const char* text = toml_raw_in(subtable, "text");
                                 const char* background = toml_raw_in(subtable, "background");
-
+                                
                                 if(background)
                                 {
                                     image = background;
-                                    image[strlen(image) - 1] = '\0'; // get rid of ""
+                                    if(image[strlen(image) - 1] == '\"') image[strlen(image) - 1] = '\0'; // get rid of ""
                                 }
 
                                 if(character && text) 
@@ -408,7 +408,6 @@ int main()
                                     #endif 
 
                                     display_interface((char *)image + 1, (char *)text, userOptions, backpackItemList, affectionPoint);
-
                                     memset(prevDialogue, 50, '\0');
                                     memset(prevKey, 50, '\0');
 
@@ -493,7 +492,7 @@ int main()
                                     if(background)
                                     {
                                         image = background;
-                                        image[strlen(image) - 1] = '\0'; // get rid of ""
+                                        if(image[strlen(image) - 1] == '\"') image[strlen(image) - 1] = '\0'; // get rid of ""
                                     }
 
                                     if(promptQ)
