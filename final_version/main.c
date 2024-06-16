@@ -398,7 +398,7 @@ int main()
                                 if(background)
                                 {
                                     image = background;
-                                    image[strlen(image) - 1] = '\0'; // get rid of ""
+                                    if(image[strlen(image) - 1] == '\"') image[strlen(image) - 1] = '\0'; // get rid of ""
                                 }
 
                                 if(character && text) 
@@ -493,7 +493,7 @@ int main()
                                     if(background)
                                     {
                                         image = background;
-                                        image[strlen(image) - 1] = '\0'; // get rid of ""
+                                        if(image[strlen(image) - 1] == '\"') image[strlen(image) - 1] = '\0'; // get rid of ""
                                     }
 
                                     if(promptQ)
