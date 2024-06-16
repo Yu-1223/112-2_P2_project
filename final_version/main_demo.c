@@ -706,6 +706,8 @@ int main()
     free(option2Text);
     free(image);
     free(backpackImage);
+    free(prevDialogue);
+    free(prevKey);
     toml_free(conf);
 
     // 釋放資源並關閉 SDL_mixer 和 SDL
