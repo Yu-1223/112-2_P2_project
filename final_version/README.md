@@ -89,6 +89,7 @@ make
 
 ## 文件結構
 專案文件結構如下：
+'''
 ├── Makefile
 ├── main.c
 ├── toml.c
@@ -101,7 +102,7 @@ make
 ├── audio/
 │   └── (audio...)
 └── README.md
-
+'''
 
 ## 已知問題
 - 目前圖片顯示僅支援 Sixel 格式
